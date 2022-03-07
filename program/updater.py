@@ -32,7 +32,7 @@ from config import UPSTREAM_REPO, BOT_USERNAME
 
 from driver.filters import command
 from driver.decorators import bot_creator
-from driver.queues import get_active_chats, remove_active_chat
+from driver.dbqueue import get_active_chats, remove_active_chat
 
 
 def gen_chlog(repo, diff):
