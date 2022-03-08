@@ -15,7 +15,7 @@
 </p>
 
 ## Deployment
-Read the [Docs](https://levina.gitbook.io/videostreambot/deployment/requirements) for Detailed Information and Setup Guide on deploying Bot.
+Read the [Docs](https://github.com/abhyudayasharma15/video-stream) for Detailed Information and Setup Guide on deploying Bot.
 
 > Click on buttons to Expand!
 <details>
