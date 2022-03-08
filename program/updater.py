@@ -32,7 +32,7 @@ from config import UPSTREAM_REPO, BOT_USERNAME
 
 from driver.filters import command
 from driver.decorators import bot_creator
-from driver.dbqueue import get_active_chats, remove_active_chat
+from driver.database.dbqueue import get_active_chats, remove_active_chat
 
 
 def gen_chlog(repo, diff):
@@ -92,11 +92,17 @@ async def update_bot(_, message: Message):
 @bot_creator
 async def restart_bot(_, message: Message):
     msg = await message.reply_text("❖ Restarting bot...")
-    served_chats = await get_active_chats()
+    served_chats = []
+    try:
+        calls = await get_active_chats()
+        for chat in calls:
+            served_chats.append(int(chat["chat_id"]))
+    except Exception:
+        pass
     for x in served_chats:
         try:
             await remove_active_chat(x)
         except Exception:
             pass
     await msg.edit_text("✅ Bot has restarted !\n\n» The bot will back active again in 5-10 seconds.")
-    os.system(f"kill -9 {os.getpid()} && python3 main.py")
+    return os.system(f"kill -9 {os.getpid()} && python3 main.py")
